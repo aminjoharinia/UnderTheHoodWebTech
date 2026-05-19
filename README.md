@@ -34,6 +34,26 @@ cd UnderTheHoodWebTech
 go build -o underthehood main.go
 ```
 
+
+### Cross-compile
+
+```bash
+# Linux amd64
+GOOS=linux GOARCH=amd64 go build -o Builds/UnderTheHoodWeb_linux_amd64 main.go
+
+# Linux arm64
+GOOS=linux GOARCH=arm64 go build -o Builds/UnderTheHoodWeb_linux_arm64 main.go
+
+# Windows
+GOOS=windows GOARCH=amd64 go build -o Builds/UnderTheHoodWeb_Windows_amd64.exe main.go
+
+# macOS (Apple Silicon)
+GOOS=darwin GOARCH=arm64 go build -o Builds/UnderTheHoodWeb_MacOS_arm64 main.go
+
+# macOS (Intel)
+GOOS=darwin GOARCH=amd64 go build -o Builds/UnderTheHoodWeb_MacOS_amd64 main.go
+```
+
 ### Cross-compile (using [garble](https://github.com/burrowers/garble) for obfuscation)
 
 ```bash
