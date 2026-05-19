@@ -463,7 +463,8 @@ func formatMessage(url string, detections []Detection, elapsed time.Duration) st
 		if len(items) == 0 {
 			return
 		}
-		sb.WriteString(header + "\n")
+		sb.WriteString(header)
+		sb.WriteString("\n")
 		for _, d := range items {
 			sb.WriteString(fmt.Sprintf("  %s *%s*\n    \u21b3 _%s_\n",
 				d.Emoji,
@@ -586,6 +587,32 @@ func startBot(token, socks5Addr string) {
 	})
 
 	fmt.Println("\U0001f916 Bot is running...")
+
+	// ─── Set bot info on startup ─────────────────────────────────────────────────
+
+	// Set bot commands (shows in the / menu)
+	commands := []tele.Command{
+		{Text: "start", Description: "Start the bot and see usage info"},
+		{Text: "help", Description: "How to use the bot"},
+	}
+	if err := b.SetCommands(commands); err != nil {
+		log.Println("Warning: could not set commands:", err)
+	}
+
+	// Set bot description (shown before user hits Start for the first time)
+	params := map[string]string{
+		"description":       "🔍 Detect the tech stack behind any website instantly.\n\nSend any URL and I'll identify frameworks, CMSs, CDNs, libraries and more — with confidence levels.",
+		"short_description": "Web tech stack detector — 30+ frameworks, CMSs & CDNs",
+	}
+	_, err = b.Raw("setMyDescription", params)
+	if err != nil {
+		log.Println("Warning: could not set description:", err)
+	}
+	_, err = b.Raw("setMyShortDescription", params)
+	if err != nil {
+		log.Println("Warning: could not set short description:", err)
+	}
+
 	b.Start()
 }
 

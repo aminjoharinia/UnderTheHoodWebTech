@@ -54,6 +54,28 @@ GOOS=darwin GOARCH=arm64 go build -o Builds/UnderTheHoodWeb_MacOS_arm64 main.go
 GOOS=darwin GOARCH=amd64 go build -o Builds/UnderTheHoodWeb_MacOS_amd64 main.go
 ```
 
+
+```bash
+chmod +x ./UnderTheHoodWeb_linux_amd64
+# or macOS
+chmod +x ./UnderTheHoodWeb_MacOS_arm64
+```
+
+```bash
+# Install
+sudo apt install upx        # Linux (Debian/Ubuntu)
+brew install upx            # macOS
+
+# Compress
+upx --best Builds/UnderTheHoodWeb_linux_amd64
+upx --best Builds/UnderTheHoodWeb_Windows_amd64.exe
+upx --best Builds/UnderTheHoodWeb_MacOS_arm64
+
+# Best compression (slower but smallest size)
+upx --ultra-brute Builds/UnderTheHoodWeb_linux_amd64
+```
+
+
 ### Cross-compile (using [garble](https://github.com/burrowers/garble) for obfuscation)
 
 ```bash
@@ -121,6 +143,10 @@ SOCKS5=127.0.0.1:10808   # optional, only needed if Telegram API is blocked
 # With SOCKS5 proxy
 ./underthehood --proxy
 ```
+
+## 🤖 Try It Live - Sample Telegram Bot
+
+[@underthehoodwebbot](https://t.me/underthehoodwebbot)
 
 ### Bot Commands
 
